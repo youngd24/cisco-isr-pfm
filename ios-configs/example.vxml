@@ -1,0 +1,14 @@
+<vxml version="2.0">
+    <form>
+        <field name="unusedField">
+            <grammar type="application/grammar+regex">.</grammar>
+            <prompt bargein="false" timeout="0s">
+                <audio src="flash:/audio/sit_discon-or-out-of-service.au" />
+            </prompt>
+            <nomatch><disconnect /></nomatch>
+            <noinput><disconnect /></noinput>
+            <filled><disconnect /></filled>
+        </field>
+    </form>
+</vxml>
+
