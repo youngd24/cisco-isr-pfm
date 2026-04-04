@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 *.pyo
 bandit-report.txt
+.envrc
