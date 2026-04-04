@@ -1,3 +1,22 @@
+#!/usr/bin/env python3
+###############################################################################
+#
+# app.py
+#
+# Flask web application for the Cisco ISR Prompt File Manager.
+#
+# Provides a browser UI that lets a user select a SIT (Special Information
+# Tone) file and a Pat Fleet AU message file, concatenates them into a single
+# G.711 µ-law AU file using lib/au.py, and serves the result as a download
+# ready for TFTP transfer to a Cisco ISR router's flash storage.
+#
+# Also renders example Cisco IOS VXML and dial-peer configuration snippets
+# populated with the generated filename.
+#
+# Contents Copyright (c) 2026, Darren Young [youngd24@gmail.com]
+#
+###############################################################################
+
 import os
 import sys
 import tempfile
@@ -406,4 +425,4 @@ def generate():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

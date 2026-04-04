@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  security:
     runs-on: self-hosted
     steps:
       - name: Pull latest code
@@ -14,6 +14,22 @@ jobs:
           cd /opt/cisco-isr-pfm
           git pull origin main
 
+      - name: Install Bandit
+        run: |
+          cd /opt/cisco-isr-pfm/webapp
+          source venv/bin/activate
+          pip install bandit
+
+      - name: Run Bandit
+        run: |
+          cd /opt/cisco-isr-pfm
+          source webapp/venv/bin/activate
+          bandit -r webapp/ -lll -iii --exclude webapp/venv -o bandit-report.txt -f txt
+
+  deploy:
+    runs-on: self-hosted
+    needs: security
+    steps:
       - name: Install dependencies
         run: |
           cd /opt/cisco-isr-pfm/webapp
