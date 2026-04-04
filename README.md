@@ -1,8 +1,16 @@
 # Cisco ISR Prompt File Manager
 
-Tools for generating, converting, and serving audio prompt files on a Cisco ISR router. The router plays audio files stored in flash via a VXML application triggered by a VoIP dial-peer. This repo provides everything needed to build those files — from raw ulaw source material through to a web UI that lets you concatenate a SIT tone with a message file and download the result ready for TFTP transfer.
+This started out, like so many other projects, as one small thing and as they tend to do, spiraled out of control with what we affectionately call 'scope creep'. While building a war dialing demo for VCFMW using a Cisco 3825/3845 ISR I wanted some of the numbers dialed to feel more authentic to the time period, the 80's and 90's, so I went down the proverbial rabbit hole.
+
+I was pointed to an archive of all the Pat Fleet audio files and they were, naturally, not in a format I could use on the ISR, they needed to be converted to 8-bit au format, so I wrote a script to do that. After a bunch of back and forth with Claude I got a working VoiceXML app that worked, I could dial a number and get a "the number you have dialed is no longer in service" message! But something didn't sound right, there was something missing, those 3 tones at the beginning I remembered being there back in "the day". So, rabbit hole number 4 starts, SIT, I was unable to find any way to generate those on the ISR, it's not a PBX really, so yet another scipt popped up to generate them. Ok, now I have that, how do I combine them? Guess, another script but it worked! Hey, this sounds like it's supposed to! At that point I probably could have called it done but, well, I have a hard time doing that.
+
+I had this pile of shell and Python now that did various bits of the work so I thought, hey, let's use Claude Code to wrangle it all together, so I did. I have to say, it did a really good job at organizing and modifying that pile into something more cohesive. At that point I figured that maybe someone else could use this so why not wrap it into a webapp so it's here as well.
+
+With that, in here are all tools for generating, converting, and serving audio prompt files on a Cisco ISR router. The router plays audio files stored in flash via a VXML application triggered by a VoIP dial-peer. This repo provides everything needed to build those files — from raw ulaw source material through to a web UI that lets you concatenate a SIT tone with a message file and download the result ready for TFTP transfer.
 
 The Pat Fleet message audio files used by this project originate from [hharte/PatFleet-asterisk](https://github.com/hharte/PatFleet-asterisk).
+
+You can self-host the webapp, it's just Flask, or use mine in the INIDEV Pub Crawl [here](https://github.com/youngd24/cisco-isr-pfm). 
 
 ---
 
