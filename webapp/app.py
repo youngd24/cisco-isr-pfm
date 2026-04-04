@@ -174,6 +174,32 @@ TEMPLATE = '''<!DOCTYPE html>
       color: #334155;
       font-style: italic;
     }
+
+    footer {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #1e2535;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #475569;
+    }
+
+    footer a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.82em;
+      background: #0a0d14;
+      border: 1px solid #1e2535;
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      color: #a5f3fc;
+    }
   </style>
 </head>
 <body>
@@ -181,7 +207,14 @@ TEMPLATE = '''<!DOCTYPE html>
 
   <header>
     <h1>Cisco ISR SIT + Message File Generator</h1>
-    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Placeholder description text — replace this with what this tool is and who it is for.</p>
+    <p>Want to serve some older style telecom messages from your Cisco ISR? Well, here you go. Pick the SIT message you want up front
+    then pick from the list of Pat Fleet messages and away you go.</p>
+
+    <p>The generated file is a G.711 µ-law (ulaw) encoded mono AU file sampled at 8000 Hz — the native audio format
+    for Cisco IOS. It is produced by prepending the selected SIT tone to the chosen message file and writing a single
+    standard Sun AU header, making it ready to copy directly to the router's flash and reference in a VXML application.</p>
+
+    <p>The Pat Fleet messages came from here: <a href="https://github.com/hharte/PatFleet-asterisk" target="_blank" rel="noopener noreferrer">https://github.com/hharte/PatFleet-asterisk</a></p>
   </header>
 
   <div class="card">
@@ -224,6 +257,19 @@ TEMPLATE = '''<!DOCTYPE html>
   </div>
 
   <div class="card">
+    <div class="section-label">Copying the File to Router Flash</div>
+    <p class="section-desc">Once downloaded, host the AU file on a TFTP server accessible to the router, then copy it
+    to flash using the following commands. Replace <code>192.168.1.10</code> with your TFTP server address and
+    <code>your_file.au</code> with the downloaded filename.</p>
+    <pre id="tftp-preview">router# copy tftp flash
+Address or name of remote host []? 192.168.1.10
+Source filename []? your_file.au
+Destination filename [your_file.au]? flash:/audio/your_file.au</pre>
+    <p class="section-desc" style="margin-top:0.8rem;">You can verify the file was copied successfully with:</p>
+    <pre>router# dir flash:/audio/</pre>
+  </div>
+
+  <div class="card">
     <div class="section-label">Cisco IOS Configuration</div>
     <p class="section-desc">You may use the below text as a template for the IOS configuration (tested on IOS 15):</p>
     <pre>application
@@ -242,6 +288,13 @@ dial-peer voice 4240 voip
   </div>
 
 </div>
+
+  <footer>
+    <p>The source code for this app is available on GitHub at
+      <a href="https://github.com/youngd24/cisco-isr-pfm" target="_blank" rel="noopener noreferrer">youngd24/cisco-isr-pfm</a>.
+    </p>
+  </footer>
+
   <script>
     const VXML_TEMPLATE = `<vxml version="2.0">
     <form>
@@ -265,14 +318,17 @@ dial-peer voice 4240 voip
       const sitVal = document.getElementById('sit_file').value;
       const auVal  = document.getElementById('au_file').value.trim();
       const preview = document.getElementById('vxml-preview');
+      const tftp    = document.getElementById('tftp-preview');
 
       if (!sitVal || !auVal) {
         preview.innerHTML = '<span class="placeholder-text">&lt;!-- select a SIT tone and AU message file to populate --&gt;</span>';
+        tftp.textContent = `router# copy tftp flash\nAddress or name of remote host []? 192.168.1.10\nSource filename []? your_file.au\nDestination filename [your_file.au]? flash:/audio/your_file.au`;
         return;
       }
 
       const filename = stripExt(sitVal) + '_' + stripExt(auVal) + '.au';
       preview.textContent = VXML_TEMPLATE.replace('AUFILE', filename);
+      tftp.textContent = `router# copy tftp flash\nAddress or name of remote host []? 192.168.1.10\nSource filename []? ${filename}\nDestination filename [${filename}]? flash:/audio/${filename}`;
     }
 
     document.getElementById('sit_file').addEventListener('change', updatePreview);
