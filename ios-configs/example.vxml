@@ -3,7 +3,7 @@
         <field name="unusedField">
             <grammar type="application/grammar+regex">.</grammar>
             <prompt bargein="false" timeout="0s">
-                <audio src="flash:/audio/sit_discon-or-out-of-service.au" />
+                <audio src="flash:/audio/%AUFILE%" />
             </prompt>
             <nomatch><disconnect /></nomatch>
             <noinput><disconnect /></noinput>
@@ -11,4 +11,3 @@
         </field>
     </form>
 </vxml>
-
