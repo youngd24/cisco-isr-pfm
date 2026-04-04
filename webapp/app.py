@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from lib.au import concat_au
 
 app = Flask(__name__)
+app.config['APPLICATION_ROOT'] = '/cisco-isr-pfm'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SIT_DIR  = os.path.join(BASE_DIR, 'sit')
@@ -338,7 +339,7 @@ dial-peer voice 4240 voip
 </html>'''
 
 
-@app.route('/')
+@app.route('/cisco-isr-pfm/')
 def index():
     return render_template_string(
         TEMPLATE,
