@@ -215,7 +215,7 @@ TEMPLATE = '''<!DOCTYPE html>
     for Cisco IOS. It is produced by prepending the selected SIT tone to the chosen message file and writing a single
     standard Sun AU header, making it ready to copy directly to the router's flash and reference in a VXML application.</p>
 
-    <p>The Pat Fleet messages came from here: <a href="https://github.com/hharte/PatFleet-asterisk" target="_blank" rel="noopener noreferrer">https://github.com/hharte/PatFleet-asterisk</a></p>
+    <p>The Pat Fleet messages came from here: <a href="https://github.com/hharte/PatFleet-asterisk" target="_blank" rel="noopener noreferrer">https://github.com/hharte/PatFleet-asterisk</a>, so special thanks to them.</p>
   </header>
 
   <div class="card">
