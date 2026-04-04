@@ -3,6 +3,8 @@
 #
 # clean.sh
 #
+# Script to clean out wav and au files
+#
 ###############################################################################
 
 echo "Cleaning wav files"
