@@ -10,7 +10,7 @@ With that, in here are all tools for generating, converting, and serving audio p
 
 The Pat Fleet message audio files used by this project originate from [hharte/PatFleet-asterisk](https://github.com/hharte/PatFleet-asterisk).
 
-You can self-host the webapp, it's just Flask, or use mine in the INIDEV Pub Crawl [here](https://github.com/youngd24/cisco-isr-pfm). 
+You can self-host the webapp, it's just Flask, or use mine in the INIDEV Pub Crawl [here](http://pubcrawl.inidev.io/cisco-isr-pfm). 
 
 ---
 
