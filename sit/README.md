@@ -4,7 +4,7 @@ This directory contains Special Information Tones (SIT) in `.au` format for use 
 
 ## What are SIT Tones?
 
-SIT tones are three-tone sequences played by the PSTN before a recorded announcement to indicate why a call could not be completed. Each class is identified by a unique combination of three tones at fixed frequencies, where each tone is either "short" (0.380s) or "long" (0.760s).
+SIT tones are three-tone sequences played by the PSTN before a recorded announcement to indicate why a call could not be completed. Each class is identified by a unique combination of three tones at fixed frequencies, where each tone is either "short" (0.276s) or "long" (0.380s).
 
 ### Tone Frequencies
 

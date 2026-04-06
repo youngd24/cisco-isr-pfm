@@ -16,8 +16,8 @@ mtone="1370.6"
 htone="1776.7"
 
 # Durations (Seconds)
-short="0.380"
-long="0.760"
+short="0.276"
+long="0.380"
 endpad="0.100"
 
 # Audio Settings for Cisco IOS
